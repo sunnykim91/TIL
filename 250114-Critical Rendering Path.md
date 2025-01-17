@@ -26,6 +26,8 @@
   - async, defer : 스크립트를 백그라운드에서 다운로드함
      - defer : HTML 파싱이 끝난 이후에 스크립트가 실행 / DOMContentLoaded이벤트 전에 실행이 보장 / 여러 스크립트에서는 선언된 순서대로 실행
      - async : 다운로드 완료되면 즉시 실행, 이때 HTML파싱중단 / 실행순서가 보장되지않음 / 독립적인 스크립트에 적합(광고,분석도구)
+     - ** 최신에는 <script type="module" src="module.js"></script> 이런식으로 사용하여서 module을 사용하여 모듈화된 코드를 작성하는데, 기본적으로 defer처럼 동작한다.
+
       ```html
          <html>
             <head>
