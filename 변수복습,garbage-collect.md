@@ -24,6 +24,19 @@ console.log(obj1.name); // 'Park'
 console.log(obj2.name); // 'Park'
 ```
 
+## var, let의 차이
+ - var로 선언된 객체는 전역객체에 등록이 된다.
+ - 함수레벨 스코프, 블록레벨 스코프 지원하냐 안하냐 / var는 블록레벨 x, let은 블록레벨 지원함
+ - 호이스팅현상에서 TDZ가 있냐 없냐  /  let은 호출먼저하고 선언나중에 하면 TDZ의 영역으로 레퍼런스에러
+ - var는 재선언 가능 
+```typescript
+var foo = 1;
+console.log(window.foo); // 1
+
+let z = 10;
+console.log(window.z); // undefined
+```
+
 
 
 ## 가비지컬렉션과 알고리즘
