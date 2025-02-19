@@ -1,4 +1,4 @@
-##Critical Rendering Path
+## Critical Rendering Path
 - 브라우저가 하나의 화면을 그려내는 과정
 1. HTML 데이터 파싱하여 DOM 트리만들기
 2. CSS 파싱하여 CSSOM 트리 만들기
@@ -9,7 +9,7 @@
 
 <img src="https://github.com/user-attachments/assets/c957df30-f9b3-4e79-9c89-dca027fbfccf" width="600px" />
 
-###파싱이란?
+### 파싱이란?
 - 구문분석 즉, 의미 있는 단위로 분해하고 해석하는 과정
 
 자세한 과정
