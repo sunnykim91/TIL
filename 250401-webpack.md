@@ -45,3 +45,11 @@
   - 스타일 처리 css-loader, style-loader,sass-loader
   - 파일 처리 : 이미지 폰트 정적파일을 포함시키기 위한 처리 수행
  
+
+### 플러그인
+- 빌드된 결과물을 개선하고 반복작업을 자동으로 처리 , 로더 이후 추가작업 수행
+- 주요 플러그인
+  - HtmlWebpackPlugin : 번들링된 Javascript 파일을 자동으로 HTML파일에 포함시켜주는 Plugin , <script>태그를 관리할 필요가없고, 빌드할때마다 최신 번들 파일이 HTML에 삽입
+  - ForkTsCheckerWebpackPlugin : Typescript 프로젝트의 성능을 향상시키는 도구, 대규모 프로젝트에서 타입 검사로 인한 빌드 시간 지연문제를 효과적으로 해결 가능
+  - MiniCssExtractPlugin : CSS코드를 별도의 파일로 분리하는 도구, 분리된 CSS파일을 브라우저 캐싱기능을 가능하게함
+  - dotenv-webpack : 환경변수를 관리, .env파일을 통해 개발/운영에 맞는 설정값 제공
