@@ -53,3 +53,57 @@
   - ForkTsCheckerWebpackPlugin : Typescript 프로젝트의 성능을 향상시키는 도구, 대규모 프로젝트에서 타입 검사로 인한 빌드 시간 지연문제를 효과적으로 해결 가능
   - MiniCssExtractPlugin : CSS코드를 별도의 파일로 분리하는 도구, 분리된 CSS파일을 브라우저 캐싱기능을 가능하게함
   - dotenv-webpack : 환경변수를 관리, .env파일을 통해 개발/운영에 맞는 설정값 제공
+
+
+### 소스맵
+- 변환된 코드와 원본 소스 코드간의 매핑 정보를 제공하는 파일, 디버깅시에 원본코드를 기반으로 문제를 파악하고 수정할수있게 도와줌
+- 트랜스파일링에 필요하다.
+- 소스맵을 적용했을때 안적용했을때 차이는 원본소스파일이 그대로 표시(어디서에러났는지도) 되면서, 중단점 설정이나 변수검사등이 가능하다. 압축된 코드만 보여준다.
+- 소스맵 사용시 주의점 :
+   - 소스맵 생성은 빌드 시간을 증가시킴, 정확도가 높을 수록 디버깅엔 좋으나, 빌드가 느려짐, 적절한 균형이 필요
+   - 보안 측면 : 원본코드가 노출될 수 있음. hidden-source-map  옵션 사용
+   - ```typescript
+     // webpack.config.js
+        module.exports = (env, argv) => {
+          const isProduction = argv.mode === 'production';
+        
+          return {
+            // ...
+            devtool: isProduction ? 'hidden-source-map' : 'eval-cheap-module-source-map',
+            // ...
+          };
+        };
+     ```
+   - 위와같이 개발환경과 프로덕션환경으로 나누어서 관리하는게 좋음
+
+
+### Webpack-merge 
+- 환경(dev, production)별로 설정을 분리하고 병합
+- ```typescript
+  // webpack.dev.js
+
+  const { merge } = require('webpack-merge');
+  const common = require('./webpack.common.js');
+  
+  module.exports = merge(common, {
+    mode: 'development', // 개발 모드 설정
+    devtool: 'eval-cheap-module-source-map', // 빠른 빌드와 디버깅을 위한 소스맵 설정
+    devServer: {
+      open: true, // 개발 서버 시작 시 브라우저 자동 열기
+      host: 'localhost', // 호스트 설정
+      port: 3000, // 포트 번호 설정 (필요 시 추가)
+      hot: true, // 핫 모듈 교체 활성화
+    },
+  });
+  ```
+- ```typescript
+  // webpack.prod.js
+
+  const { merge } = require('webpack-merge');
+  const common = require('./webpack.common.js');
+  
+  module.exports = merge(common, {
+    mode: 'production', // 프로덕션 모드 설정
+    devtool: false, // 소스맵 비활성화
+  });
+  ```
